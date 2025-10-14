@@ -1,33 +1,53 @@
-module decoder_2_4_df(y,I,e);
-input [1:0]I;
-output [3:0]y;
-input e;
-
-//   assign y[0] = ~a[1] & ~a[0];
-//   assign y[1] = ~a[1] &  a[0];
-//   assign y[2] =  a[1] & ~a[0];
-//   assign y[3] =  a[1] &  a[0];
-assign y={e& I[1]&I[0],//msb
-          e& I[1]&~I[0],
-          e& ~I[1]&I[0],
-          e& ~I[1]&~I[0]};//lsb
-
-endmodule
-
-module decoder_2_4_bh(y,I,e);
-input [1:0]I;
-output reg [3:0]y;
-input e;
-always @ (*) begin 
-case({e,I})
-      3'b100: y = 4'b0001; // e=1, I=00
-      3'b101: y = 4'b0010; // e=1, I=01
-      3'b110: y = 4'b0100; // e=1, I=10
-      3'b111: y = 4'b1000; // e=1, I=11
-      default: y = 4'b0000; // e=0 → output disabled
-
-  endcase
-  end
-endmodule
-
-
+$date
+	Tue Oct 14 18:58:46 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module decoder_2_4_tb $end
+$var wire 4 ! y [3:0] $end
+$var reg 2 " I [1:0] $end
+$var reg 1 # e $end
+$scope module decoder_2_4_1 $end
+$var wire 2 $ I [1:0] $end
+$var wire 1 # e $end
+$var reg 4 % y [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1 %
+b0 $
+1#
+b0 "
+b1 !
+$end
+#10
+b10 !
+b10 %
+b1 "
+b1 $
+#20
+b100 !
+b100 %
+b10 "
+b10 $
+#30
+b1000 !
+b1000 %
+b11 "
+b11 $
+#40
+b0 !
+b0 %
+b0 "
+b0 $
+0#
+#50
